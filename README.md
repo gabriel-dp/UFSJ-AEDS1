@@ -1,2 +1,7 @@
-# UFSJ-AEDS1
-This repositoy contains all codes produced during the laboratory classes of Algorithms and Data Structures 1 (AEDS1)
+# UFSJ - AEDS1
+
+All classes from 2022.1
+
+Prof - Sofia Costa
+
+
