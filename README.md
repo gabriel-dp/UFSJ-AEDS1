@@ -1,7 +1,11 @@
 # UFSJ - AEDS1
 
-All classes from 2022.1
+Todas os exercícios realizados durante as aulas de AEDS1 no labortório de informática.
 
-Prof - Sofia Costa
+Até o momento:
 
+- 05/04
 
+- 12/04
+
+- 19/04
