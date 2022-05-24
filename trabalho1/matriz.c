@@ -4,15 +4,10 @@
 #define QUANTIDADE 2
 
 void main () {
-    int alunos[QUANTIDADE][4] = { NULL };
-    /*
-        1 - matricula
-        2 - codigo do curso
-        3 - sexo
-        4 - cr do aluno
-    */
+	int alunos[QUANTIDADE][4] = { 0 };
+	int finalizar = 0; 	//controla o fim do loop
 
-   	while (1) {
+	while (!finalizar) {
 		int opcao;
 		printf("\n(1) Preencher a matriz de dados\n(2) Visualizar a matriz de dados\n(3) Aluna com CR mais alto do curso\n(4) Visualizar cursos da matriz\n(5) Encerrar programa\nOpcao Escolhida: ");
 		scanf("%d", &opcao);
@@ -22,19 +17,24 @@ void main () {
 			case 1:
 				for (int i = 0; i < QUANTIDADE; i++) {
 					printf("\n---Aluno %d---", i+1);
+
 					printf("\nNumero da matricula (9 digitos): ");
 					scanf("%d", &alunos[i][0]);
+
 					printf("Codigo do curso (4 digitos): ");
 					scanf("%d", &alunos[i][1]);
+
 					printf("Sexo (0-Fem | 1-Masc | 2-Outro): ");
 					scanf("%d", &alunos[i][2]);
 					if (alunos[i][2] != 0 && alunos[i][2] != 1) alunos[i][2] = 2; //classifica numeros diferentes como "outro" 
+
 					printf("CR: ");
 					scanf("%d", &alunos[i][3]);
 				}
 				break;
+
 			case 2:
-				if (alunos[0][0] == NULL) {
+				if (alunos[0][0] == 0) {
 					printf("\nMatriz de dados vazia - Preencha na opcao 1\n\n");
 				} else {
 					printf("\nMATRICULA - CURSO - SEXO - CR\n");
@@ -47,8 +47,9 @@ void main () {
 					}
 				}
 				break;
+
 			case 3:
-				if (alunos[0][0] == NULL) {
+				if (alunos[0][0] == 0) {
 					printf("\nMatriz de dados vazia - Preencha na opcao 1\n\n");
 				} else {
 					printf("\nInsira o codigo do curso: ");
@@ -65,8 +66,9 @@ void main () {
 					else printf("\nNumero de curso invalido - tente novamente\n\n");
 				}
 				break;
+
 			case 4: 
-				if (alunos[0][0] == NULL) {
+				if (alunos[0][0] == 0) {
 					printf("\nMatriz de dados vazia - Preencha na opcao 1\n\n");
 				} else {
 					for (int i = 0; i < QUANTIDADE; i++) {
@@ -86,9 +88,10 @@ void main () {
 					printf("\n");
 					break;
 				}
+
 			case 5:
 				printf("\nPrograma encerrado\n\n");
-				exit(0);
+				finalizar = 1;
 				break;
 			default:
 				printf("\nOpcao invalida\n\n");
