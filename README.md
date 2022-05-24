@@ -19,3 +19,7 @@ Até o momento:
 - 10/05 (Atividade 7)
 
 - 17/05 (Atividade 8)
+
+- 24/05 (Atividade 9)
+
+- 25/05 (Trabalho 1)
