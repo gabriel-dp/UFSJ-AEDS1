@@ -2,12 +2,12 @@
 
 #define QUANTIDADE 20
 
-struct dados {
+typedef struct {
     int matricula;
     int curso;
     int sexo;
     float cr;
-};
+} dados;
 
 int menuSeletor () {
     int opcao;
@@ -24,7 +24,7 @@ int menuSeletor () {
     return opcao;
 }
 
-void preencherDados (struct dados * alunos) {
+void preencherDados (dados * alunos) {
     for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
         printf("\n---Aluno %d---\n", aluno+1);
 
@@ -47,7 +47,7 @@ void preencherDados (struct dados * alunos) {
     }
 }
 
-void visualizarDados (struct dados * alunos) {
+void visualizarDados (dados * alunos) {
     printf("\n  MATRICULA  |  CURSO | SEXO |   CR\n");
     for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
         printf("  %9d  |  %4d  |  %2d  |  %.4f  \n", alunos[aluno].matricula, alunos[aluno].curso, alunos[aluno].sexo, alunos[aluno].cr);
@@ -55,7 +55,7 @@ void visualizarDados (struct dados * alunos) {
     printf("\n");
 }
 
-void maiorCrFeminino (struct dados * alunos) {
+void maiorCrFeminino (dados * alunos) {
     int cursoPesquisa;
     printf("\nCurso da aluna: ");
     scanf("%d", &cursoPesquisa);
@@ -79,7 +79,7 @@ void maiorCrFeminino (struct dados * alunos) {
     printf("\n\n");
 }
 
-void visualizarCursos (struct dados * alunos) {
+void visualizarCursos (dados * alunos) {
     int cursos[QUANTIDADE], contador = 0;
 
     for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
@@ -101,20 +101,19 @@ void visualizarCursos (struct dados * alunos) {
     }
 }
 
-int dadosInseridos (struct dados * alunos) {
-    int inserido = !(alunos[0].matricula == 0);
+int dadosInseridos (dados * alunos) {
+    int inserido = !(alunos[0].matricula == -1);
     if (!inserido) printf("\nPreencha os dados antes\n\n");
     return inserido;
 }
 
 void main () {
 
-    struct dados alunos[QUANTIDADE] = { 0 };
+    dados alunos[QUANTIDADE] = { -1 };
     int encerrar = 0;
 
     while (!encerrar) {
         int operacao = menuSeletor();
-
         switch (operacao) {
             case 1:     //PREENCHER DADOS
                 preencherDados(alunos);
