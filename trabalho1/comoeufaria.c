@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define QUANTIDADE 2
+#define QUANTIDADE 20
 
 struct dados {
     int matricula;
