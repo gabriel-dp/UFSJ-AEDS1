@@ -1,7 +1,6 @@
 #include <stdio.h>
-#include <math.h>
 
-#define QUANTIDADE 2
+#define QUANTIDADE 20
 
 void main () {
 	int alunos[QUANTIDADE][4] = { 0 };
