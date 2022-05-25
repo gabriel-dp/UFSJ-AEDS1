@@ -86,8 +86,8 @@ void main () {
 						printf("%d\n", cursos[i]);
 					} 
 					printf("\n");
-					break;
 				}
+				break;
 
 			case 5:
 				printf("\nPrograma encerrado\n\n");
