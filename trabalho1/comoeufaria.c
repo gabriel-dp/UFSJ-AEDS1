@@ -56,14 +56,63 @@ void visualizarDados (struct dados * alunos) {
 }
 
 void maiorCrFeminino (struct dados * alunos) {
-    
+    int cursoPesquisa;
+    printf("\nCurso da aluna: ");
+    scanf("%d", &cursoPesquisa);
+
+    float maiorCr = -1;
+    for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
+        if (alunos[aluno].curso == cursoPesquisa && alunos[aluno].sexo == 0 && alunos[aluno].cr > maiorCr) {
+            maiorCr = alunos[aluno].cr;
+        }
+    }
+
+    if (maiorCr != -1) {
+        printf("Maior CR = %.4f\nPertence a: |", maiorCr);
+        for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
+            if (alunos[aluno].cr == maiorCr) printf(" %d |", alunos[aluno].matricula);
+        }
+    } else {
+        printf("Nao existe aluna no curso %d", cursoPesquisa);
+    }
+
+    printf("\n\n");
+}
+
+void visualizarCursos (struct dados * alunos) {
+    int cursos[QUANTIDADE], contador = 0;
+
+    for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
+        int repetido = 0;
+        for (int indice = 0; indice < QUANTIDADE; indice++) {
+            if (alunos[aluno].curso == cursos[indice]) {
+                repetido = 1;
+            }
+        }
+        if (!repetido) {
+            cursos[contador] = alunos[aluno].curso;
+            contador++;
+        }
+    }
+
+    printf("\nCursos existentes:\n");
+    for (int curso = 0; curso < contador; curso++) {
+        printf("%d\n", cursos[curso]);
+    }
+}
+
+int dadosInseridos (struct dados * alunos) {
+    int inserido = !(alunos[0].matricula == 0);
+    if (!inserido) printf("\nPreencha os dados antes\n\n");
+    return inserido;
 }
 
 void main () {
 
-    struct dados alunos[QUANTIDADE];
+    struct dados alunos[QUANTIDADE] = { 0 };
+    int encerrar = 0;
 
-    while (1) {
+    while (!encerrar) {
         int operacao = menuSeletor();
 
         switch (operacao) {
@@ -71,19 +120,20 @@ void main () {
                 preencherDados(alunos);
                 break;
             case 2:     //VISUALIZAR DADOS
-                visualizarDados(alunos);
+                if (dadosInseridos(alunos)) visualizarDados(alunos);
                 break;
-            case 3:     //MULHER COM MAIOR CR
-
+            case 3:     //MAIOR CR FEMININO
+                if (dadosInseridos(alunos)) maiorCrFeminino(alunos);
                 break;
             case 4:     //VISUALIZAR CURSOS
-
+                if (dadosInseridos(alunos)) visualizarCursos(alunos);
                 break;
             case 5:     //ENCERRA PROGRAMA
-
+                printf("\nPrograma encerrado\n\n");
+                encerrar = 1;
                 break;
             default:    //OPCAO INVALIDA
-
+                printf("\nOpcao invalida - tente novamente\n\n");
                 break;
         }
     }
