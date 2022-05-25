@@ -1,3 +1,12 @@
+/*
+	Trabalho Prático 1 - AEDS1
+	Aluno - Gabriel de Paula Meira
+	Data de envio - 25/05/2022
+	Código 100% autoral
+	Criado sem aplicar registros e funcoes 
+	Para ver uma versao aprimorada acesse: https://github.com/gabrieldp23/UFSJ-AEDS1/blob/main/trabalho1/comoeufaria.c
+*/
+
 #include <stdio.h>
 
 #define QUANTIDADE 20
