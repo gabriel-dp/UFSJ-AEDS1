@@ -1,3 +1,10 @@
+/*
+	Trabalho Prático 1 - AEDS1
+	Aluno - Gabriel de Paula Meira
+	Data de envio - 01/junho/2022
+	Código 100% autoral
+*/
+
 #include <stdio.h>
 
 #define QUANTIDADE 20
@@ -24,7 +31,7 @@ int menuSeletor () {
     return opcao;
 }
 
-void preencherDados (dados * alunos) {
+void preencherDados (dados alunos [QUANTIDADE]) {
     for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
         printf("\n---Aluno %d---\n", aluno+1);
 
@@ -47,7 +54,7 @@ void preencherDados (dados * alunos) {
     }
 }
 
-void visualizarDados (dados * alunos) {
+void visualizarDados (dados alunos [QUANTIDADE]) {
     printf("\n  MATRICULA  |  CURSO | SEXO |   CR\n");
     for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
         printf("  %9d  |  %4d  |  %2d  |  %.4f  \n", alunos[aluno].matricula, alunos[aluno].curso, alunos[aluno].sexo, alunos[aluno].cr);
@@ -55,7 +62,7 @@ void visualizarDados (dados * alunos) {
     printf("\n");
 }
 
-void maiorCrFeminino (dados * alunos) {
+void maiorCrFeminino (dados alunos [QUANTIDADE]) {
     int cursoPesquisa;
     printf("\nCurso da aluna: ");
     scanf("%d", &cursoPesquisa);
@@ -79,7 +86,7 @@ void maiorCrFeminino (dados * alunos) {
     printf("\n\n");
 }
 
-void visualizarCursos (dados * alunos) {
+void visualizarCursos (dados alunos [QUANTIDADE]) {
     int cursos[QUANTIDADE], contador = 0;
 
     for (int aluno = 0; aluno < QUANTIDADE; aluno++) {
@@ -101,7 +108,7 @@ void visualizarCursos (dados * alunos) {
     }
 }
 
-int dadosInseridos (dados * alunos) {
+int dadosInseridos (dados alunos [QUANTIDADE]) {
     int inserido = !(alunos[0].matricula == -1);
     if (!inserido) printf("\nPreencha os dados antes\n\n");
     return inserido;

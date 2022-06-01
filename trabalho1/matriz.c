@@ -47,11 +47,10 @@ void main () {
 				} else {
 					printf("\nMATRICULA - CURSO - SEXO - CR\n");
 					for (int i = 0; i < QUANTIDADE; i++) {
-						for (int j = 0; j < 4; j++) {
-							printf("  %d  ", alunos[i][j]);
-							if (j != 3) printf("|");
-						}
-						printf("\n");
+						//printf matricula
+						//printf curso
+						//printf sexo
+						//printf cr
 					}
 				}
 				break;
