@@ -43,12 +43,12 @@ void preencherDados (dados alunos [QUANTIDADE]) {
 
         printf("Sexo (0-Fem | 1-Masc | 2-Outro): ");
         scanf("%d", &alunos[aluno].sexo);
-        if (alunos[aluno].sexo != 0 && alunos[aluno].sexo != 1) alunos[aluno].sexo = 2;     //classifica numeros diferentes de 0 e 1 como 2
+        if (alunos[aluno].sexo != 0 && alunos[aluno].sexo != 1) alunos[aluno].sexo = 2;     // classifica numeros diferentes de 0 e 1 como 2
 
         printf("CR (0 a 10): ");
         scanf("%f", &alunos[aluno].cr);
         if (alunos[aluno].cr > 10) alunos[aluno].cr = 10;
-        else if (alunos[aluno].cr < 0) alunos [aluno].cr = 0;                             //limita o CR ao intervalo 0-10
+        else if (alunos[aluno].cr < 0) alunos[aluno].cr = 0;                                // limita o CR ao intervalo 0-10
 
         printf("\n");
     }
@@ -116,29 +116,29 @@ int dadosInseridos (dados alunos [QUANTIDADE]) {
 
 void main () {
 
-    dados alunos[QUANTIDADE] = { -1 };
+    dados alunos[QUANTIDADE] = {-1};
     int encerrar = 0;
 
     while (!encerrar) {
         int operacao = menuSeletor();
         switch (operacao) {
-            case 1:     //PREENCHER DADOS
+            case 1:     // PREENCHER DADOS
                 preencherDados(alunos);
                 break;
-            case 2:     //VISUALIZAR DADOS
+            case 2:     // VISUALIZAR DADOS
                 if (dadosInseridos(alunos)) visualizarDados(alunos);
                 break;
-            case 3:     //MAIOR CR FEMININO
+            case 3:     // VISUALIZAR MAIOR CR FEMININO
                 if (dadosInseridos(alunos)) maiorCrFeminino(alunos);
                 break;
-            case 4:     //VISUALIZAR CURSOS
+            case 4:     // VISUALIZAR CURSOS
                 if (dadosInseridos(alunos)) visualizarCursos(alunos);
                 break;
-            case 5:     //ENCERRA PROGRAMA
+            case 5:     // ENCERRAR PROGRAMA
                 printf("\nPrograma encerrado\n\n");
                 encerrar = 1;
                 break;
-            default:    //OPCAO INVALIDA
+            default:    // OPCAO INVALIDA
                 printf("\nOpcao invalida - tente novamente\n\n");
                 break;
         }
