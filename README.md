@@ -12,7 +12,7 @@ Até o momento:
 
 - 26/04 [(Atividade 05)](atividade05/atividade05.md)
 
-- 27/04 (lista P1)
+- 27/04 [(lista P1)](exercicios-prova1/exercicios-prova1.md)
 
 - 03/05 [(Atividade 06)](atividade06/atividade06.md)
 
