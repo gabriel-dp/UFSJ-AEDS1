@@ -27,7 +27,7 @@ void preencherDados (dados pessoas[PESSOAS]) {
     }
 }
 
-dados ordemAlfabetica (dados pessoas[PESSOAS]) {
+void ordemAlfabetica (dados pessoas[PESSOAS]) {
     char temp[LIMITE];
     for (int i = 0; i < PESSOAS; i++) {
         for (int j = i+1; j < PESSOAS; j++) {
