@@ -22,6 +22,6 @@ Até o momento:
 
 - 24/05 [(Atividade 09)](atividade09/atividade09.md)
 
-- 25/05 (Trabalho 1)
+- 25/05 [(Trabalho 1)](trabalho1/trabalho1.md)
 
 - 31/05 [(Atividade 10)](atividade10/atividade10.md)
