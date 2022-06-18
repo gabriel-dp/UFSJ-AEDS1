@@ -20,8 +20,8 @@
 
 - Problema 5: Faça um programa que leia uma matriz de tamanho 5×5 e, em seguida, calcule e imprima a soma dos elementos dessa matriz que estão acima da diagonal principal. Os elementos acima da diagonal principal aparecem em azul na matriz abaixo.
 
-    a₀₀ <span style="color:dodgerblue">a₀₁ a₀₂ a₀₃ a₀₄</span><br/>
-    a₁₀ a₁₁ <span style="color:dodgerblue">a₁₂ a₁₃ a₁₄</span><br/>
-    a₂₀ a₂₁ a₂₂ <span style="color:dodgerblue">a₂₃ a₂₄</span><br/>
-    a₃₀ a₃₁ a₃₂ a₃₃ <span style="color:dodgerblue">a₃₄</span><br/>
-    a₄₀ a₄₁ a₄₂ a₄₃ a₄₄
+    a₀₀ &nbsp;`a₀₁` `a₀₂` `a₀₃` `a₀₄`<br/>
+    a₁₀ &nbsp;&nbsp;a₁₁ &nbsp;&nbsp;`a₁₂` `a₁₃` `a₁₄`<br/>
+    a₂₀ &nbsp; a₂₁ &nbsp; a₂₂ &nbsp;&nbsp;`a₂₃` `a₂₄`<br/>
+    a₃₀ &nbsp; a₃₁ &nbsp; a₃₂ &nbsp; a₃₃ &nbsp;&nbsp;`a₃₄`<br/>
+    a₄₀ &nbsp; a₄₁ &nbsp; a₄₂ &nbsp; a₄₃ &nbsp; a₄₄
