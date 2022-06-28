@@ -1,35 +1,43 @@
 #include <stdio.h> 
+#include <string.h>
 
 #define LIMITE 50
 
-int indiceChar (char string[LIMITE], char caractere) {
+int indiceChar (char caractere, char string[LIMITE]) {
     for (int i = 0; i < strlen(string); i++) {
         if (string[i] == caractere) return i;
     }
     return -1;
 }
 
-int stringContem (char string[LIMITE], char substring[LIMITE]) {
-    while (indiceChar(string, substring[0]) != -1) {
-        int indice = indiceChar(string, substring[0]); 
-        int tamanho = strlen(substring);
+int stringContem (char substring[LIMITE], char string[LIMITE]) {
+    int substringlen = strlen(substring);
 
-        int igual = 1;
-        for (int i = indice; i < indice+tamanho; i++) {
-            if (indiceChar(string, substring[i])) igual = 0;
+    int contem = 1;
+    do {
+        int primeiroIndice = indiceChar(substring[0], string);
+
+        if (primeiroIndice == -1) return 0;
+        for (int i = primeiroIndice; i < primeiroIndice+substringlen; i++) {
+            if (indiceChar(substring[i], string) == -1) {
+                string += i;
+                contem = 0;
+            }
         }
-        if (igual = 1) return 1;
-    }
+    } while (contem == 0);
+    
+    return 1;
 }
 
 void main () {
-    char string[LIMITE];
+    char string[LIMITE], substring[LIMITE];
     printf("\nInsira a string: ");
     fgets(string, LIMITE, stdin);
     setbuf(stdin, NULL);
-    char caractere;
-    printf("Insira o caractere: ");
-    scanf("%c", &caractere);
 
-    printf("\n%d\n", stringContem("gabriel", "g"));
+    printf("\nInsira a substring: ");
+    fgets(substring, LIMITE, stdin);
+    setbuf(stdin, NULL);
+
+    printf("\n%d\n\n", stringContem(substring, string));
 }
