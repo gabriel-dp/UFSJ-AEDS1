@@ -7,7 +7,7 @@ void removeEnter (char str[]) {
     if (str[strlen(str)-1] == '\n') str[strlen(str)-1] = '\0';
 }
 
-int indiceChar (char caractere, char string[]) {
+int charIndex (char caractere, char string[]) {
     for (int i = 0; i < strlen(string); i++) {
         if (string[i] == caractere) return i;
     }
@@ -15,10 +15,11 @@ int indiceChar (char caractere, char string[]) {
 }
 
 int stringContem (char substring[], char string[]) {
-    if (indiceChar(substring[0], string) == -1) return 0;
+    int index = charIndex(substring[0], string);
+    if (index == -1) return 0;
     for (int i = 0; i < strlen(substring); i++) {
-        if (indiceChar(substring[i], string) == -1) {
-            return stringContem(substring, string+(i+1));
+        if (substring[i] != string[index+i]) {
+            return stringContem(substring, string+i);
         }
     }
     return 1;
