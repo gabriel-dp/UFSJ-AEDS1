@@ -15,17 +15,12 @@ int indiceChar (char caractere, char string[]) {
 }
 
 int stringContem (char substring[], char string[]) {
-    int contem;
-    do {
-        contem = 1;
-        if (indiceChar(substring[0], string) == -1) return 0;
-        for (int i = 0; i < strlen(substring); i++) {
-            if (indiceChar(substring[i], string) == -1) {
-                string += (i+1);
-                contem = 0;
-            }
+    if (indiceChar(substring[0], string) == -1) return 0;
+    for (int i = 0; i < strlen(substring); i++) {
+        if (indiceChar(substring[i], string) == -1) {
+            return stringContem(substring, string+(i+1));
         }
-    } while (contem == 0);
+    }
     return 1;
 }
 
