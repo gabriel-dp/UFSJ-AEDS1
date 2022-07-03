@@ -2,14 +2,11 @@
 #include <string.h>
 #include "tp.h"
 
-//mensagens de erros
+//mensagens de erros repetidas
 #define ONIBUS_INVALIDO "ERRO - Onibus nao encontrado"
 #define ONIBUS_LOTADO "ERRO - Onibus lotado"
 #define PASSAGEIRO_INVALIDO "ERRO - Passageiro nao encontrado"
 #define CADASTRO_INCOMPLETO "ERRO - Cadastro incompleto"
-
-#define STR_(X) #X
-#define STR(X) STR_(X)
 
 void printMensagem (char *mensagem) {
     printf("<---- %s ---->\n", mensagem);
@@ -22,21 +19,20 @@ int onibusForamCadastrados (dados onibus[]) {
 
 int lugaresForamCadastrados (dados onibus[]) {
     //a quantidade de lugares do primeiro onibus foi definida como -1 no inicio da funcao main()
-    return onibus[0].quantidadeTotal != -1;
+    return onibus[0].quantidadeReservas != -1;
 }
 
 void consertaString (char *nome) {
     int tamanho = strlen(nome);
-    if (nome[tamanho] == '\n') nome[tamanho] = '\0';
     if (nome[tamanho-1] == '\n') nome[tamanho-1] = '\0';
+    nome[STRING_MAX] = '\0';
 }
 
 char *obterNome () {
-    static char nome[STRING_MAX];
+    static char nome[STRING_MAX+1];
     printf("Nome do passageiro (max %d caracteres): ", STRING_MAX);
     fflush(stdin); setbuf(stdin, NULL);
     fgets(nome, STRING_MAX+2, stdin);
-    fflush(stdin); setbuf(stdin, NULL);
     consertaString(nome);
     return nome;
 }
@@ -44,8 +40,19 @@ char *obterNome () {
 void cadastrarOnibus (dados onibus[]) {
     printMensagem("CADASTRAR VEICULOS");
     for (int i = 0; i < QUANTIDADE_ONIBUS; i++) {
-        printf("Numero do onibus %d: ", i+1);
-        scanf("%d", &onibus[i].id);
+        int numero, repetido;
+        do {
+            repetido = 0;
+            printf("Numero do onibus %d: ", i+1);
+            scanf("%d", &numero);
+            for (int j = 0; j < QUANTIDADE_ONIBUS; j++) {
+                if (onibus[j].id == numero) {
+                    printMensagem("ERRO - Onibus ja cadastrado");
+                    repetido = 1;
+                }
+            }
+        } while (repetido == 1);
+        onibus[i].id = numero;
     }
     printMensagem("VEICULOS CADASTRADOS COM SUCESSO");
 }
@@ -58,16 +65,16 @@ void cadastrarLugares (dados onibus[]) {
 
     printMensagem("CADASTRAR QUANTIDADE DE ASSENTOS");
     for (int i = 0; i < QUANTIDADE_ONIBUS; i++) {
-        int lugares = NULL;
+        int lugares = 0;
         do {
-            if (lugares != NULL) {
+            if (lugares != 0) {
                 printMensagem("ERRO - Quantidade Invalida");
             }
             printf("Quantidade de lugares do onibus %d: ", onibus[i].id);
             scanf("%d", &lugares);
         } while (lugares < 0 || lugares > QUANTIDADE_LUGARES_MAX);
-        onibus[i].quantidadeTotal = lugares;
-        onibus[i].quantidadeDisponivel = onibus[i].quantidadeTotal;
+        onibus[i].quantidadeDisponivel = lugares;
+        onibus[i].quantidadeReservas = 0;
     }
     printMensagem("ASSENTOS CADASTRADOS COM SUCESSO");
 }
@@ -88,7 +95,7 @@ void reservarLugar (dados onibus[]) {
             erro = 2;
             if (onibus[i].quantidadeDisponivel > 0) {
                 erro = 0;
-                int indicePassageiro = onibus[i].quantidadeTotal - onibus[i].quantidadeDisponivel;
+                int indicePassageiro = onibus[i].quantidadeReservas;
                 strncpy(onibus[i].passageiros[indicePassageiro], obterNome(), STRING_MAX);
 
                 onibus[i].quantidadeDisponivel--;
@@ -127,9 +134,9 @@ void consultarOnibus (dados onibus[]) {
 
             //tabela de dados            
             for (int i = 0;  i < STRING_MAX+9;  i++, printf("%c", '_'));
-            printf("\n| %s | %-" STR(STRING_MAX) "s |\n", "NR", "NOME");
+            printf("\n| %s | %-*s |\n", "NR", STRING_MAX, "NOME");
             for (int reserva = 0; reserva < onibus[i].quantidadeReservas; reserva++) {
-                printf("| %2d | %-" STR(STRING_MAX) "s |\n", reserva, onibus[i].passageiros[reserva]);
+                printf("| %2d | %-*s |\n", reserva, STRING_MAX, onibus[i].passageiros[reserva]);
             }
             printf("|");
             for (int i = 0;  i < STRING_MAX+7;  i++, printf("%c", '_'));
@@ -149,7 +156,10 @@ void consultarPassageiro (dados onibus[]) {
         return;
     }
 
+    printMensagem("CONSULTAR PASSAGEIRO");
     char *passageiro = obterNome();
+
+    //tabela de dados
     for (int i = 0;  i < 23;  i++, printf("%c", '_'));
     printf("\n| %9-s | %7-s |\n", "ONIBUS", "RESERVA");
     for (int i = 0; i < QUANTIDADE_ONIBUS; i++) {
