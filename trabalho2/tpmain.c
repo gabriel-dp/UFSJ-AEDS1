@@ -7,41 +7,44 @@ enum opcoes_menu {
 } opcoes;
 
 int obterOpcao () {
-    fflush(stdin); setbuf(stdin, NULL);
     int input;
-    printf("\n(1) Cadastrar numeros dos onibus\n(2) Cadastrar lugares disponiveis\n(3) Reservar passagem\n(4) Consultar reservas por onibus\n(5) Consultar onibus por passageiro\n(6) Encerrar programa");
+    printf( "\n(1) Cadastrar numeros dos onibus"
+            "\n(2) Cadastrar lugares disponiveis"
+            "\n(3) Reservar passagem"
+            "\n(4) Consultar reservas por onibus"
+            "\n(5) Consultar onibus por passageiro"
+            "\n(6) Encerrar programa");
     printf("\nOpcao escolhida: ");
+    fflush(stdin); setbuf(stdin, NULL);
     scanf("%d", &input);
     printf("\n");
     return input;
 }
 
 void main () {
-    int opcao;
-
     dados onibus[QUANTIDADE_ONIBUS] = {{
         .id = -1,
         .quantidadeReservas = -1
     }};
 
+    int opcao;
     do {
         opcao = obterOpcao();
-
         switch (opcao) {
             case cadastrar_onibus:
-                cadastrarOnibus(&onibus);
+                cadastrarOnibus(onibus);
                 break;
             case cadastrar_lugares:
-                cadastrarLugares(&onibus);
+                cadastrarLugares(onibus);
                 break;
             case reservar_lugar:
-                reservarLugar(&onibus);
+                reservarLugar(onibus);
                 break;
             case consultar_onibus:
-                consultarOnibus(&onibus);
+                consultarOnibus(onibus);
                 break;
             case consultar_passageiro:
-                consultarPassageiro(&onibus);
+                consultarPassageiro(onibus);
                 break;
             case encerrar_programa:
                 printMensagem("PROGRAMA ENCERRADO");

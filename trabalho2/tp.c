@@ -9,7 +9,7 @@ int lugaresForamCadastrados (dados onibus[]);
 void consertaString (char *nome);
 char *obterNome ();
 
-
+/*  Cadastra o numero de identificacao de cada onibus, evitando repetir os ids  */
 void cadastrarOnibus (dados onibus[]) {
     printMensagem("CADASTRAR VEICULOS");
     for (int i = 0; i < QUANTIDADE_ONIBUS; i++) {
@@ -30,6 +30,7 @@ void cadastrarOnibus (dados onibus[]) {
     printMensagem("VEICULOS CADASTRADOS COM SUCESSO");
 }
 
+/*  Verifica se os ids ja foram cadastrados e entao cadastra a quantidade de lugares disponiveis, evitando valores negativos e maiores que o maximo definido */
 void cadastrarLugares (dados onibus[]) {
     if (!onibusForamCadastrados(onibus)) {
         printMensagem(CADASTRO_INCOMPLETO);
@@ -52,6 +53,7 @@ void cadastrarLugares (dados onibus[]) {
     printMensagem("ASSENTOS CADASTRADOS COM SUCESSO");
 }
 
+/*  Verifica se o cadastro dos onibus foi realizado para reservar o assento registrando o nome do passageiro  */
 void reservarLugar (dados onibus[]) {
     if (!onibusForamCadastrados(onibus)|| !lugaresForamCadastrados(onibus)) {
         printMensagem(CADASTRO_INCOMPLETO);
@@ -90,6 +92,7 @@ void reservarLugar (dados onibus[]) {
     }
 }
 
+/*  Verifica se o cadastro dos onibus foi realizado para mostrar as reservas do onibus informado em uma tabela  */
 void consultarOnibus (dados onibus[]) {
     if (!onibusForamCadastrados(onibus)|| !lugaresForamCadastrados(onibus)) {
         printMensagem(CADASTRO_INCOMPLETO);
@@ -123,6 +126,7 @@ void consultarOnibus (dados onibus[]) {
     }
 }
 
+/*  Verifica se o cadastro dos onibus foi realizado para mostrar a tabela de reservas do passageiro informado  */
 void consultarPassageiro (dados onibus[]) {
     if (!onibusForamCadastrados(onibus)|| !lugaresForamCadastrados(onibus)) {
         printMensagem(CADASTRO_INCOMPLETO);
