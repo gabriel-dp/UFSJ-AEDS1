@@ -6,7 +6,9 @@ int obterOpcao () {
     int input;
     printf("\n(1) Cadastrar numeros dos onibus\n(2) Cadastrar lugares disponiveis\n(3) Reservar passagem\n(4) Consultar reservas por onibus\n(5) Consultar onibus por passageiro\n(6) Encerrar programa");
     printf("\nOpcao escolhida: ");
+    fflush(stdin); setbuf(stdin, NULL);
     scanf("%d", &input);
+    printf("\n");
     return input;
 }
 
@@ -17,7 +19,10 @@ void encerrarPrograma () {
 void main () {
     int opcao;
 
-    dados onibus[QUANTIDADE_ONIBUS];
+    dados onibus[QUANTIDADE_ONIBUS] = {{
+        .id = -1,
+        .quantidadeTotal = -1
+    }};
 
     do {
         opcao = obterOpcao();
@@ -25,16 +30,15 @@ void main () {
         switch (opcao) {
             case cadastrar_onibus:
                 cadastrarOnibus(&onibus);
-                printf("%d", onibus[3].id);
                 break;
             case cadastrar_lugares:
-                printf("bbb");
+                cadastrarLugares(&onibus);
                 break;
             case reservar:
-                printf("bbb");
+                reservarLugar(&onibus);
                 break;
             case consultar_onibus:
-                printf("bbb");
+                consultarOnibus(&onibus);
                 break;
             case consultar_passageiro:
                 printf("bbb");
