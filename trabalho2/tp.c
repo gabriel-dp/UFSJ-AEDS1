@@ -2,40 +2,13 @@
 #include <string.h>
 #include "tp.h"
 
-//mensagens de erros repetidas
-#define ONIBUS_INVALIDO "ERRO - Onibus nao encontrado"
-#define ONIBUS_LOTADO "ERRO - Onibus lotado"
-#define PASSAGEIRO_INVALIDO "ERRO - Passageiro nao encontrado"
-#define CADASTRO_INCOMPLETO "ERRO - Cadastro incompleto"
+#define CADASTRO_INCOMPLETO "ERRO - Cadastro Incompleto"
 
-void printMensagem (char *mensagem) {
-    printf("<---- %s ---->\n", mensagem);
-}
+int onibusForamCadastrados (dados onibus[]);
+int lugaresForamCadastrados (dados onibus[]);
+void consertaString (char *nome);
+char *obterNome ();
 
-int onibusForamCadastrados (dados onibus[]) {
-    //o numero do primeiro onibus foi definido como -1 no inicio da funcao main()
-    return onibus[0].id != -1;
-}
-
-int lugaresForamCadastrados (dados onibus[]) {
-    //a quantidade de lugares do primeiro onibus foi definida como -1 no inicio da funcao main()
-    return onibus[0].quantidadeReservas != -1;
-}
-
-void consertaString (char *nome) {
-    int tamanho = strlen(nome);
-    if (nome[tamanho-1] == '\n') nome[tamanho-1] = '\0';
-    nome[STRING_MAX] = '\0';
-}
-
-char *obterNome () {
-    static char nome[STRING_MAX+1];
-    printf("Nome do passageiro (max %d caracteres): ", STRING_MAX);
-    fflush(stdin); setbuf(stdin, NULL);
-    fgets(nome, STRING_MAX+2, stdin);
-    consertaString(nome);
-    return nome;
-}
 
 void cadastrarOnibus (dados onibus[]) {
     printMensagem("CADASTRAR VEICULOS");
@@ -106,10 +79,10 @@ void reservarLugar (dados onibus[]) {
 
     switch (erro) {
         case 1:
-            printMensagem(ONIBUS_INVALIDO);
+            printMensagem("ERRO - Onibus nao encontrado");
             return;
         case 2:
-            printMensagem(ONIBUS_LOTADO);
+            printMensagem("ERRO - Onibus lotado");
             return;
         default:
             printMensagem("RESERVA CONFIRMADA COM SUCESSO");
@@ -145,7 +118,7 @@ void consultarOnibus (dados onibus[]) {
     }
 
     if (!encontrado) {
-        printMensagem(ONIBUS_INVALIDO);
+        printMensagem("ERRO - Onibus nao encontrado");
         return;
     }
 }
@@ -161,15 +134,42 @@ void consultarPassageiro (dados onibus[]) {
 
     //tabela de dados
     for (int i = 0;  i < 23;  i++, printf("%c", '_'));
-    printf("\n| %9-s | %7-s |\n", "ONIBUS", "RESERVA");
+    printf("\n| %9s | %7s |\n", "ONIBUS", "RESERVA");
     for (int i = 0; i < QUANTIDADE_ONIBUS; i++) {
         for (int j = 0; j < onibus[i].quantidadeReservas; j++) {
             if (strcmp(onibus[i].passageiros[j], passageiro) == 0) {
-                printf("| %9-d | %7-d |\n", onibus[i].id, j+1);
+                printf("| %9d | %7d |\n", onibus[i].id, j+1);
             }
         }
     }
     printf("|");
     for (int i = 0;  i < 21;  i++, printf("%c", '_'));
     printf("|\n");
+}
+
+void printMensagem (char *mensagem) {
+    printf("<---- %s ---->\n", mensagem);
+}
+
+int onibusForamCadastrados (dados onibus[]) {
+    return onibus[0].id != -1;
+}
+
+int lugaresForamCadastrados (dados onibus[]) {
+    return onibus[0].quantidadeReservas != -1;
+}
+
+void consertaString (char *nome) {
+    int tamanho = strlen(nome);
+    if (nome[tamanho-1] == '\n') nome[tamanho-1] = '\0';
+    nome[STRING_MAX] = '\0';
+}
+
+char *obterNome () {
+    static char nome[STRING_MAX+1];
+    printf("Nome do passageiro (max %d caracteres): ", STRING_MAX);
+    fflush(stdin); setbuf(stdin, NULL);
+    fgets(nome, STRING_MAX+2, stdin);
+    consertaString(nome);
+    return nome;
 }

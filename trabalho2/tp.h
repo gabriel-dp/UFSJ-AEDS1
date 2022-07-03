@@ -1,5 +1,4 @@
 #ifndef _TP_H
-
 #define _TP_H
 
 #define QUANTIDADE_ONIBUS 4
@@ -13,11 +12,11 @@ typedef struct {
     char passageiros[QUANTIDADE_LUGARES_MAX][STRING_MAX+1];
 } dados;
 
-void printMensagem (char *mensagem);
 void cadastrarOnibus (dados onibus[]);
 void cadastrarLugares (dados onibus[]);
 void reservarLugar (dados onibus[]);
 void consultarOnibus (dados onibus[]);
 void consultarPassageiro (dados onibus[]);
+void printMensagem (char *mensagem);
 
 #endif
