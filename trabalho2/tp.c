@@ -8,6 +8,9 @@
 #define PASSAGEIRO_INVALIDO "ERRO - Passageiro nao encontrado"
 #define CADASTRO_INCOMPLETO "ERRO - Cadastro incompleto"
 
+#define STR_(X) #X
+#define STR(X) STR_(X)
+
 void printMensagem (char *mensagem) {
     printf("<---- %s ---->\n", mensagem);
 }
@@ -22,10 +25,20 @@ int lugaresForamCadastrados (dados onibus[]) {
     return onibus[0].quantidadeTotal != -1;
 }
 
-void consertaString (char nome[STRING_MAX+2]) {
+void consertaString (char *nome) {
     int tamanho = strlen(nome);
     if (nome[tamanho] == '\n') nome[tamanho] = '\0';
     if (nome[tamanho-1] == '\n') nome[tamanho-1] = '\0';
+}
+
+char *obterNome () {
+    static char nome[STRING_MAX];
+    printf("Nome do passageiro (max %d caracteres): ", STRING_MAX);
+    fflush(stdin); setbuf(stdin, NULL);
+    fgets(nome, STRING_MAX+2, stdin);
+    fflush(stdin); setbuf(stdin, NULL);
+    consertaString(nome);
+    return nome;
 }
 
 void cadastrarOnibus (dados onibus[]) {
@@ -76,15 +89,8 @@ void reservarLugar (dados onibus[]) {
             if (onibus[i].quantidadeDisponivel > 0) {
                 erro = 0;
                 int indicePassageiro = onibus[i].quantidadeTotal - onibus[i].quantidadeDisponivel;
+                strncpy(onibus[i].passageiros[indicePassageiro], obterNome(), STRING_MAX);
 
-                char nome[STRING_MAX];
-                printf("Nome do passageiro (max %d caracteres): ", STRING_MAX);
-                fflush(stdin); setbuf(stdin, NULL);
-                fgets(nome, STRING_MAX+2, stdin);
-                fflush(stdin); setbuf(stdin, NULL);
-                
-                consertaString(nome);
-                strncpy(onibus[i].passageiros[indicePassageiro], nome, STRING_MAX);
                 onibus[i].quantidadeDisponivel--;
                 onibus[i].quantidadeReservas++;
             }
@@ -120,13 +126,13 @@ void consultarOnibus (dados onibus[]) {
             encontrado = 1;
 
             //tabela de dados            
-            for (int i = 0;  i < 59;  i++, printf("%c", '_'));
-            printf("\n| %s | %-50s |\n", "NR", "NOME");
+            for (int i = 0;  i < STRING_MAX+9;  i++, printf("%c", '_'));
+            printf("\n| %s | %-" STR(STRING_MAX) "s |\n", "NR", "NOME");
             for (int reserva = 0; reserva < onibus[i].quantidadeReservas; reserva++) {
-                printf("| %2d | %-50s |\n", reserva, onibus[i].passageiros[reserva]);
+                printf("| %2d | %-" STR(STRING_MAX) "s |\n", reserva, onibus[i].passageiros[reserva]);
             }
             printf("|");
-            for (int i = 0;  i < 57;  i++, printf("%c", '_'));
+            for (int i = 0;  i < STRING_MAX+7;  i++, printf("%c", '_'));
             printf("|\n");
         }
     }
@@ -137,9 +143,23 @@ void consultarOnibus (dados onibus[]) {
     }
 }
 
-/*
 void consultarPassageiro (dados onibus[]) {
+    if (!onibusForamCadastrados(onibus)|| !lugaresForamCadastrados(onibus)) {
+        printMensagem(CADASTRO_INCOMPLETO);
+        return;
+    }
 
+    char *passageiro = obterNome();
+    for (int i = 0;  i < 23;  i++, printf("%c", '_'));
+    printf("\n| %9-s | %7-s |\n", "ONIBUS", "RESERVA");
+    for (int i = 0; i < QUANTIDADE_ONIBUS; i++) {
+        for (int j = 0; j < onibus[i].quantidadeReservas; j++) {
+            if (strcmp(onibus[i].passageiros[j], passageiro) == 0) {
+                printf("| %9-d | %7-d |\n", onibus[i].id, j+1);
+            }
+        }
+    }
+    printf("|");
+    for (int i = 0;  i < 21;  i++, printf("%c", '_'));
+    printf("|\n");
 }
-
-*/

@@ -41,7 +41,7 @@ void main () {
                 consultarOnibus(&onibus);
                 break;
             case consultar_passageiro:
-                printf("bbb");
+                consultarPassageiro(&onibus);
                 break;
             case encerrar_programa:
                 encerrarPrograma();
