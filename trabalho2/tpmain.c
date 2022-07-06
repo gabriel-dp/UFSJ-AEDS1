@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include "tp.h"
-#include "tp.c"
 
 enum opcoes_menu {
     cadastrar_onibus = 1, cadastrar_lugares, reservar_lugar, consultar_onibus, consultar_passageiro, encerrar_programa
@@ -15,7 +14,6 @@ int obterOpcao () {
             "\n(5) Consultar onibus por passageiro"
             "\n(6) Encerrar programa");
     printf("\nOpcao escolhida: ");
-    fflush(stdin); setbuf(stdin, NULL);
     scanf("%d", &input);
     printf("\n");
     return input;
