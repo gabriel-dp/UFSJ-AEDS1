@@ -1,3 +1,10 @@
+/*
+    Trabalho Prático 2 - AEDS1
+    Autores: Gabriel de Paula & Guilherme Francis
+    Data de envio: 06/julho/2022
+    Código 100% autoral
+*/
+
 #include <stdio.h>
 #include "tp.h"
 
@@ -20,7 +27,7 @@ int obterOpcao () {
 }
 
 void main () {
-    dados onibus[QUANTIDADE_ONIBUS] = {{
+    dados onibus[QUANTIDADE_ONIBUS] = {{    //define os valores de id e reservas do primeiro onibus para conseguir saber se o cadastro foi realizado
         .id = -1,
         .quantidadeReservas = -1
     }};
